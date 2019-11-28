@@ -1,5 +1,5 @@
 FROM alpine:3.10.1
-MAINTAINER Keszi <gabor.keszeli@antavo.com>
+MAINTAINER Keszi <keszi000@gmail.com>
 
 RUN apk --update --no-cache add gettext nginx; \
     rm -rf /var/cache/apk/*; \
