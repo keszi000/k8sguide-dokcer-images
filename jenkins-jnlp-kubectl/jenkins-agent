@@ -47,6 +47,7 @@ kubectl config set-cluster temp --server=https://kubernetes.default --certificat
 kubectl config set-context temp --cluster=local; \
 kubectl config set-credentials user --token=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token); \
 kubectl config set-context temp --user=user; \
+kubectl config set-context temp --namespace=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace) \
 kubectl config use-context temp;
 
 
