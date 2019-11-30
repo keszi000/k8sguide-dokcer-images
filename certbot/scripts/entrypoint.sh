@@ -35,9 +35,9 @@ MAIN_DOMAIN=$(echo $DOMAINS | cut -f1 -d',');
 
 mkdir -p $HOME/.well-known/acme-challenge/;
 echo "OK" > $HOME/.well-known/acme-challenge/test;
-HOST="http://$MAIN_DOMAIN:$PORT/.well-known/acme-challenge/test";
+HOST="http://$MAIN_DOMAIN/.well-known/acme-challenge/test";
 
-while [ "200" -ne $(curl -o /dev/null -s -w "%{http_code}\n" $HOST) ]; do
+while [ "200" -ne $(curl -Lo /dev/null -s -w "%{http_code}\n" $HOST) ]; do
   echo "Waiting for services...";
   sleep 5s;
 done
