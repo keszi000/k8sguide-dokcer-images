@@ -4,10 +4,6 @@ pipelineJob('basic') {
     choiceParam('OPTION', ['option 1 (default)', 'option 2', 'option 3'])
   }
   definition {
-    node('ansible') {
-      stage('get kubectl pod names') {
-          sh "kubectl get pods"
-      }
-    }
+    scriptPath("auth/Jenkinsfile")
   }
 }
