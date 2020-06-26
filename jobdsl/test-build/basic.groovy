@@ -4,6 +4,16 @@ pipelineJob('basic') {
     choiceParam('OPTION', ['option 1 (default)', 'option 2', 'option 3'])
   }
   definition {
-    scriptPath("auth/Jenkinsfile")
+    cpsScm {
+        scm {
+          git {
+            remote {
+              url ('https://github.com/keszi000/k8sguide-dokcer-images.git')
+              credentials('defaultgit')
+            }
+          }
+        }
+        scriptPath("jobdsl/test-build/Jenkinsfile")
+    }
   }
 }
