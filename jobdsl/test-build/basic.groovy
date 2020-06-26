@@ -1,4 +1,4 @@
-pipelineJob('basic') {
+pipelineJob('test-build') {
   parameters {
     booleanParam('TEST_FLAG', true)
     choiceParam('OPTION', ['option 1 (default)', 'option 2', 'option 3'])
