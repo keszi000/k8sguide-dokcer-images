@@ -1,0 +1,69 @@
+jenkins:
+  systemMessage: "AutoDeployed Jenkins"
+
+unclassified:
+  location:
+    url: http://localhost:8080/
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - basicSSHUserPrivateKey:
+              scope: GLOBAL
+              id: defaultgit
+              username: ${JENKINS_GIT_USER}
+              passphrase: ${JENKINS_GIT_PWD}
+              description: "Auth for default git repo "
+
+jobs:
+  - script: >
+      job('super-seed') {
+        scm {
+          git {
+            remote {
+              url ('${JOB_REPO}')
+              credentials('defaultgit')
+            }
+          }
+        }
+        steps {
+          dsl {
+            external('jobdsl/**/*.groovy')
+            removeAction('DELETE')
+          }
+        }
+      }
+security:
+  globaljobdslsecurityconfiguration:
+    useScriptSecurity: false
+
+jenkins:
+  clouds:
+    - kubernetes:
+        name: "local-kubernetes"
+        serverUrl: "https://kubernetes.default"
+        namespace: "jenkins"
+        jenkinsUrl: "http://jenkins-ui.jenkins:8080"
+        jenkinsTunnel: "jenkins-discovery.jenkins:50000"
+        containerCapStr: 42
+        maxRequestsPerHostStr: 64
+        retentionTimeout: 5
+        connectTimeout: 10
+        readTimeout: 20
+
+        templates:
+          - name: "k8s-slave-ansible"
+            namespace: "jenkins"
+            label: "ansible"
+            containers:
+              - name: "jnlp"
+                image: "k8sguide/jenkins-jnlp-ansible:latest"
+                command: ""
+                args: "^${computer.jnlpmac} ^${computer.name}"
+                alwaysPullImage: true
+                workingDir: "/opt"
+                ttyEnabled: true
+            instanceCapStr: 1
+            idleMinutes: 0
+            slaveConnectTimeout: 100
