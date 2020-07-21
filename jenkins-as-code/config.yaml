@@ -3,18 +3,18 @@ jenkins:
 
 unclassified:
   location:
-    url: http://localhost:8080/
+    url: "${JENKINS_URL}"
 
 credentials:
   system:
     domainCredentials:
       - credentials:
-          - basicSSHUserPrivateKey:
+          - usernamePassword:
               scope: GLOBAL
               id: defaultgit
-              username: ${JENKINS_GIT_USER}
-              passphrase: ${JENKINS_GIT_PWD}
-              description: "Auth for default git repo "
+              username: ${GIT_USER}
+              password: ${GIT_PASSWORD}
+              description: "Username/Password Credentials for jobs git repo"
 
 jobs:
   - script: >

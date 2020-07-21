@@ -1,6 +1,7 @@
 configuration-as-code:1.41
 job-dsl:1.77
 config-file-provider:3.6.3
+uno-choice:2.3
 
 pipeline-stage-view:2.13
 jdk-tool:1.4
@@ -9,7 +10,7 @@ antisamy-markup-formatter:2.0
 pipeline-rest-api:2.13
 ldap:1.24
 scm-api:2.6.3
-kubernetes:1.26.1
+kubernetes:1.26.2
 pipeline-build-step:2.12
 cloudbees-folder:6.14
 mapdb-api:1.0.9.0
@@ -50,11 +51,11 @@ git:4.3.0
 ssh-slaves:1.31.2
 ssh-credentials:1.18.1
 workflow-cps:2.80
-credentials:2.3.9
+credentials:2.3.10
 subversion:2.13.1
 pipeline-model-definition:1.7.0
 workflow-basic-steps:2.20
-pipeline-stage-step:2.3
+pipeline-stage-step:2.5
 workflow-scm-step:2.11
 github:1.30.0
 jackson2-api:2.11.0
